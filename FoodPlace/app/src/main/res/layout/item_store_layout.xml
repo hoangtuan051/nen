@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_image_item_store_layout"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/backbutton"
+        android:scaleType="centerCrop"
+        />
+
+    <RelativeLayout
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name_store_item_store_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bò Beefsteak Hỏa Diệm Son"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:textColor="#000"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_rating_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/tv_name_store_item_store_layout"
+            >
+
+            <RatingBar
+                android:id="@+id/rtb_rating_item_store_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3.0"
+                android:stepSize="0.1"
+                android:scaleY="0.65"
+                android:scaleX="0.65"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:isIndicator="false"
+                style="@style/foodRatingBar"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/tv_amount_review_item_store_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 review"
+                android:textColor="#000"
+
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_address_item_store_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="331 Nguyễn Trãi"
+            android:singleLine="true"
+            android:layout_below="@id/ll_rating_container"
+            />
+
+        <TextView
+            android:id="@+id/tv_special_food_item_store_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nước ngọt, Beefsteak - Bò né"
+            android:textStyle="italic"
+            android:layout_below="@id/tv_address_item_store_layout"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

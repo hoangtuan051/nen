@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rlBarTop"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@android:color/white"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/rlBack"
+            android:layout_width="43dp"
+            android:layout_height="43dp">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_keyboard_arrow_left_black_24dp"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/lnRight"
+            android:layout_toRightOf="@+id/rlBack"
+            android:background="@android:color/transparent"
+            android:singleLine="true"
+            android:text="Gallery"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+
+        <LinearLayout
+            android:id="@+id/lnRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlCamera"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_toLeftOf="@+id/tvAdd"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:paddingRight="10dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="38dp"-->
+                    <!--android:layout_height="38dp"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:background="@drawable/ic_capture" />-->
+
+            <!--</RelativeLayout>-->
+
+            <TextView
+                android:id="@+id/tvAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="Done"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_green_dark" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

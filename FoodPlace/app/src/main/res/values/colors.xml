@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#004d40</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPressedNavigation">#f2c4ab</color>
+    <color name="colorNormalNavigation">#FFFE8846</color>
+    <color name="colorTextNameStore">#323232</color>
+    <color name="colorButtonLike">#696969</color>
+    <color name="colorTextFoodName">#2b2929</color>
+    <color name="colorTextStateService">#d3504f</color>
+    <color name="colorAmountLike">#4c67a0</color>
+    <color name="colorTextReviewName">#4c4c4c</color>
+    <color name="colorBackground">#dcdee3</color>
+    <color name="colorDividerLine">#dcdcdc</color>
+</resources>

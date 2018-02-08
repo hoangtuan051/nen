@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_image_review"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/colorDividerLine"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    />
+
+                <LinearLayout
+                    android:layout_toRightOf="@id/iv_user_image_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_user_name_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EchBeo157"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/ll_amount_friend_review"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center"
+                            >
+
+                            <ImageView
+                                android:src="@drawable/icon_num_friend"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp" />
+
+                            <TextView
+                                android:id="@+id/tv_num_friend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_toRightOf="@id/ll_amount_friend_review"
+                            android:id="@+id/ll_amount_review"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="5dp"
+                            >
+
+                            <ImageView
+                                android:src="@drawable/icon_num_review"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp" />
+
+                            <TextView
+                                android:id="@+id/tv_amount_review"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="221"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_toRightOf="@id/ll_amount_review"
+                            android:id="@+id/ll_reward_review"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            >
+
+                            <ImageView
+                                android:src="@drawable/icon_num_tip"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp" />
+
+                            <TextView
+                                android:id="@+id/tv_amount_reward_review"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="31"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_arrow_review"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.25dp"
+                android:background="@color/colorDividerLine"
+                />
+
+            <TextView
+                android:id="@+id/tv_time_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="09/11/2016"
+                android:gravity="right"
+                />
+
+            <TextView
+                android:id="@+id/tv_header_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mỳ ý chú Hoài với món mới"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="15sp"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RatingBar
+                    android:id="@+id/rtb_rating_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="4.0"
+                    android:stepSize="0.1"
+                    android:isIndicator="false"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:scaleX=".75"
+                    android:scaleY=".75"
+                    style="@style/foodRatingBar"
+                    />
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_rating_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.0/5.0"
+                    android:textColor="@color/colorNormalNavigation"
+                    android:layout_gravity="bottom"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_content_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nghe nói quán mỳ nổi tiếng của chú Hoài dời qua địa chỉ mới rồi nhen, chỗ rộng hơn có Nghe nói quán mỳ nổi tiếng của chú Hoài dời qua địa chỉ mới rồi nhen, chỗ rộng hơn có Nghe nói quán mỳ nổi tiếng của chú Hoài dời qua địa chỉ mới rồi nhen, chỗ rộng hơn có"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/rclv_highlight_image_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:background="@color/colorDividerLine"
+            />
+
+        <LinearLayout
+            android:background="#f7f5f5"
+            android:weightSum="6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/icon_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_num_like"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hay 3"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.25dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorDividerLine"
+                />
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                >
+
+                <ImageView
+                    android:src="@drawable/icon_helpful"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_num_helpful"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hữu ích 1"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.25dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorDividerLine"
+                />
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/icon_message_yellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_num_comment"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bình luận 6"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
