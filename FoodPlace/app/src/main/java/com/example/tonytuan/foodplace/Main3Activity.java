@@ -467,13 +467,6 @@ public class Main3Activity extends AppCompatActivity {
                             showDialogImage();
                             return true;
                         }
-//                        DisplayMetrics displayMetrics = new DisplayMetrics();
-//                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//                        int width = displayMetrics.widthPixels;
-//                        RelativeLayout.LayoutParams layoutParam = (RelativeLayout.LayoutParams) fab.getLayoutParams();
-//                        layoutParam.leftMargin = width - initialTouchX - 2 * fab.getWidth();
-//                        layoutParam.topMargin = initialTouchY - yDelta;
-//                        fab.setLayoutParams(layoutParam);
                         break;
                     default:
                         break;
