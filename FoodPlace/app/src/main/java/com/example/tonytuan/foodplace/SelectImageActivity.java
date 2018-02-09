@@ -28,7 +28,6 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tonytuan.foodplace.adapter.CustomImageAdapter;
 import com.example.tonytuan.foodplace.common.Common;
@@ -247,21 +246,21 @@ public class SelectImageActivity extends AppCompatActivity implements View.OnCli
 
         images.get(position).isSelected = !images.get(position).isSelected;
 
-        for(int i = 0; i < images.size(); i++){
-            if(i != position){
-                images.get(i).isSelected = false;
-            }
-            else {
-                if (images.get(i).isSelected)
-                    countSelected = 1;
-                else countSelected = 0;
-            }
-        }
+//        for(int i = 0; i < images.size(); i++){
+//            if(i != position){
+//                images.get(i).isSelected = false;
+//            }
+//            else {
+//                if (images.get(i).isSelected)
+//                    countSelected = 1;
+//                else countSelected = 0;
+//            }
+//        }
 
-//        if (images.get(position).isSelected)
-//            countSelected++;
-//        else
-//            countSelected--;
+        if (images.get(position).isSelected)
+            countSelected++;
+        else
+            countSelected--;
 
         customImageAdapter.notifyDataSetChanged();
 
@@ -381,12 +380,14 @@ public class SelectImageActivity extends AppCompatActivity implements View.OnCli
                     finish();
                 break;
             case R.id.tvAdd:
-                if(countSelected > limitImage)
-                    Toast.makeText(getApplicationContext(), "Tối đa chọn 1 hình", Toast.LENGTH_SHORT).show();
-                else {
-                    sendData();
-                    finish();
-                }
+//                if(countSelected > limitImage)
+//                    Toast.makeText(getApplicationContext(), "Tối đa chọn 1 hình", Toast.LENGTH_SHORT).show();
+//                else {
+//                    sendData();
+//                    finish();
+//                }
+                sendData();
+                finish();
                 break;
         }
     }

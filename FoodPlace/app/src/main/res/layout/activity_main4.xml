@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.tonytuan.foodplace.Main4Activity">
 
-    <android.support.v4.widget.CircleImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitCenter"
+        android:id="@+id/iv"
+        android:src="@drawable/chip"
         />
 
 </android.support.constraint.ConstraintLayout>

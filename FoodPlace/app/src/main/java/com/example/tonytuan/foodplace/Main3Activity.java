@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -78,6 +79,7 @@ public class Main3Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText edt_content, edt_description;
     private TextView tv_share, tv_back, tv_prb;
+    private RelativeLayout rl_root, rl_back;
     private ProgressBar prb;
     private ContentAdapter adapter;
     private LinearLayoutManager layoutManager;
@@ -94,7 +96,9 @@ public class Main3Activity extends AppCompatActivity {
     public static final String mypreference = "mypref";
     private int sizeEdit = 0;
     int a = 10;
+    private boolean isClicked = false;
     long totalSize = 0;
+    int count = 0;
 
     RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
         @Override
@@ -172,18 +176,20 @@ public class Main3Activity extends AppCompatActivity {
         tv_share = (TextView) findViewById(R.id.tv_share);
         prb = (ProgressBar) findViewById(R.id.prb);
         tv_prb = (TextView) findViewById(R.id.tv_prb);
+        rl_root = (RelativeLayout) findViewById(R.id.rl_root);
+        rl_back = (RelativeLayout) findViewById(R.id.rl_back);
 
         tv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
         tv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new UploadToServer().execute();
+                new UploadToServer().execute(Common.images.get(0).path);
                 //uploadToServer();
             }
         });
@@ -224,30 +230,91 @@ public class Main3Activity extends AppCompatActivity {
                                 recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
                             }
                         }, 100);
+
+                        Log.d("ma", "open");
                         break;
                 }
                 return true;
             }
         });
 
-        recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        rl_root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (bottom < oldBottom) {
-                    Toast.makeText(getApplicationContext(), "resume " + isResume + "", Toast.LENGTH_SHORT).show();
-                    if (isResume) {
-                        recyclerView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                            }
-                        }, 100);
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                rl_root.getWindowVisibleDisplayFrame(r);
+                int screenHeight = rl_root.getRootView().getHeight();
 
-                        isResume = false;
+                int keypadHeight = screenHeight - r.bottom;
+
+                Log.d("mapi", "keypadHeight = " + keypadHeight);
+
+                if(keypadHeight > screenHeight * 0.15){
+                    //keyboard is opened
+                    //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
+                      if(adapter.getItemCount() == 3){
+                            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(edt_content.getLayoutParams());
+                            layoutParams.removeRule(RelativeLayout.BELOW);
+                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1);
+                            edt_content.setLayoutParams(layoutParams);
+                            edt_content.setVisibility(View.VISIBLE);
+                            edt_content.requestFocus();
+
+                            RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(recyclerView.getLayoutParams());
+                            layoutParams2.addRule(RelativeLayout.BELOW, R.id.rl_back);
+                            layoutParams2.addRule(RelativeLayout.ABOVE, R.id.edt_content);
+                            recyclerView.setLayoutParams(layoutParams2);
+                            Log.d("type", "2");
+
+                          recyclerView.postDelayed(new Runnable() {
+                              @Override
+                              public void run() {
+                                  recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+                              }
+                          }, 100);
                     }
+                }
+                else{
+                    //keyboard is closed
+                    if(adapter.getItemCount() == 3)
+                    {
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(edt_content.getLayoutParams());
+                        layoutParams.addRule(RelativeLayout.BELOW, R.id.rcv_contents);
+                        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                        edt_content.setLayoutParams(layoutParams);
+                        edt_content.setVisibility(View.VISIBLE);
+                        //edt_content.requestFocus();
+
+                        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(recyclerView.getLayoutParams());
+                        layoutParams2.addRule(RelativeLayout.BELOW, R.id.rl_back);
+                      //  layoutParams2.addRule(RelativeLayout.ABOVE, R.id.edt_content);
+                        recyclerView.setLayoutParams(layoutParams2);
+                        Log.d("type", "1");
+                    }
+
+
                 }
             }
         });
+
+//        recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                if (bottom < oldBottom) {
+//                    Toast.makeText(getApplicationContext(), "resume " + isResume + "", Toast.LENGTH_SHORT).show();
+//                    if (isResume) {
+//                        recyclerView.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+//                            }
+//                        }, 100);
+//
+//                        isResume = false;
+//                    }
+//                }
+//            }
+//        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -277,6 +344,8 @@ public class Main3Activity extends AppCompatActivity {
                     layoutParams2.addRule(RelativeLayout.BELOW, R.id.rl_back);
                     layoutParams2.addRule(RelativeLayout.ABOVE, R.id.edt_content);
                     recyclerView1.setLayoutParams(layoutParams2);
+
+                    Log.d("type", "2");
                 }
 
                 if (dy < 0)
@@ -300,6 +369,11 @@ public class Main3Activity extends AppCompatActivity {
                 int initialTouchX = (int) event.getRawX();
                 int initialTouchY = (int) event.getRawY();
 
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int width = displayMetrics.widthPixels;
+                int height = displayMetrics.heightPixels;
+
                 switch (event.getAction() & MotionEvent.ACTION_MASK) {
                     case MotionEvent.ACTION_DOWN:
                         lastTouchDown = System.currentTimeMillis();
@@ -312,25 +386,77 @@ public class Main3Activity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_MOVE:
 
-                        v.animate()
-                                .x(event.getRawX() + xDelta)
-                                .y(event.getRawY() + yDelta)
-                                .setDuration(0)
-                                .start();
+                        if(initialTouchX > width - v.getWidth() + 50){
+                            v.animate()
+                                    .x(width - v.getWidth())
+                                    .y(event.getRawY() + yDelta)
+                                    .setDuration(0)
+                                    .start();
+                        }
+                        else if(initialTouchX < v.getWidth() - 50){
+                            v.animate()
+                                    .x(0)
+                                    .y(event.getRawY() + yDelta)
+                                    .setDuration(0)
+                                    .start();
+                        }
+                        else{
+                            v.animate()
+                                    .x(event.getRawX() + xDelta)
+                                    .y(event.getRawY() + yDelta)
+                                    .setDuration(0)
+                                    .start();
+                        }
+
                         Log.d("gestures", "move " + initialTouchX + " " + initialTouchY + " " + fab.getWidth());
 
                         break;
                     case MotionEvent.ACTION_UP:
-                        DisplayMetrics displayMetrics = new DisplayMetrics();
-                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                        int width = displayMetrics.widthPixels;
-
-                        if (initialTouchX > width - v.getWidth() + 50) {
-                            v.animate()
-                                    .x(event.getRawX() - v.getWidth() - 25)
-                                    .y(event.getRawY() + yDelta)
-                                    .setDuration(0)
-                                    .start();
+                        if(initialTouchX < width/2){
+                            if(initialTouchY < height / 8){
+                                v.animate()
+                                        .x(0)
+                                        .y(height / 8)
+                                        .setDuration(0)
+                                        .start();
+                            }
+                            else if(initialTouchY > height * 7/8){
+                                v.animate()
+                                        .x(0)
+                                        .y(6*height/8)
+                                        .setDuration(0)
+                                        .start();
+                            }
+                            else {
+                                v.animate()
+                                        .x(0)
+                                        .y(event.getRawY() + yDelta)
+                                        .setDuration(0)
+                                        .start();
+                            }
+                        }
+                        else{
+                            if(initialTouchY < height / 8){
+                                v.animate()
+                                        .x(width - v.getWidth())
+                                        .y(height / 8)
+                                        .setDuration(0)
+                                        .start();
+                            }
+                            else if(initialTouchY > height * 7/8){
+                                v.animate()
+                                        .x(width - v.getWidth())
+                                        .y(6*height/8)
+                                        .setDuration(0)
+                                        .start();
+                            }
+                            else {
+                                v.animate()
+                                        .x(width - v.getWidth())
+                                        .y(event.getRawY() + yDelta)
+                                        .setDuration(0)
+                                        .start();
+                            }
                         }
 
                         int xDiff = (int) (event.getRawX() - initialTouchX);
@@ -583,7 +709,7 @@ public class Main3Activity extends AppCompatActivity {
         try {
             if (Common.images.size() > 0) {
                 ArrayList<Image> images = Common.images;
-                Common.images = new ArrayList<>();
+                //Common.images = new ArrayList<>();
                 if (images.size() > 0)
                     getImage(images.get(0));
             }
@@ -593,7 +719,7 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
-    private class UploadToServer extends AsyncTask<Void, Integer, String>{
+    private class UploadToServer extends AsyncTask<String, Integer, String>{
 
         private final String TAG = UploadToServer.class.getName();
         private NotificationCompat.Builder mBuilder;
@@ -623,7 +749,7 @@ public class Main3Activity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected String doInBackground(String... params) {
             return uploadFile();
         }
 
@@ -642,10 +768,10 @@ public class Main3Activity extends AppCompatActivity {
                     }
                 });
 
-                File sourceFile =  new File(imgPath);
+                File sourceFile = new File(Common.images.get(count).path);
                 // Adding file data to http body
-                entity.addPart("sampleFile", new FileBody(sourceFile));
-                entity.addPart("name", new StringBody("sampleFile"));
+                entity.addPart("ab" + count, new FileBody(sourceFile));
+                entity.addPart("name", new StringBody("ab" + count));
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
 
@@ -676,10 +802,22 @@ public class Main3Activity extends AppCompatActivity {
             super.onPostExecute(result);
             Log.e(TAG, "Response from server: " + result);
             // showing the server response in an alert dialog
-            showAlert(result);
+           // showAlert(result);
             prb.setVisibility(View.GONE);
             tv_prb.setVisibility(View.GONE);
             setCompletedNotification();
+
+            if(result != null){
+                ++count;
+                if(count < Common.images.size()) {
+                    totalSize = 0;
+                    new UploadToServer().execute(Common.images.get(count).path);
+                }
+                else {
+                    Common.images = new ArrayList<>();
+                    count = 0;
+                }
+            }
         }
 
         private void initNotification(){
@@ -690,7 +828,7 @@ public class Main3Activity extends AppCompatActivity {
 
         private void setStartedNotification(){
             mBuilder.setSmallIcon(R.drawable.chip)
-                    .setContentTitle(imgPath)
+                    .setContentTitle("DDAU upload service")
                     .setContentText("Started");
 
            // mBuilder.setContentIntent(resultPendingIntent);
@@ -701,14 +839,14 @@ public class Main3Activity extends AppCompatActivity {
 
         }
 
-        private void setProgressNotification() {
-            mBuilder.setContentTitle(imgPath).setContentText("Downloading in progress ")
-                    .setSmallIcon(R.drawable.chip);
-        }
+//        private void setProgressNotification() {
+//            mBuilder.setContentTitle("DDAU upload service").setContentText("Downloading in progress ")
+//                    .setSmallIcon(R.drawable.chip);
+//        }
 
         private void updateProgressNotification(int icr){
-            mBuilder.setContentTitle(imgPath)
-                    .setContentText("Downloading in progress " + icr + "%")
+            mBuilder.setContentTitle("DDAU upload service")
+                    .setContentText("Downloading in progress " + icr + "%" + " - " + count + "/" + Common.images.size())
                     .setSmallIcon(R.drawable.chip)
                     .setProgress(100, icr, false);
             mNotificationManager.notify(1, mBuilder.build());
@@ -716,7 +854,7 @@ public class Main3Activity extends AppCompatActivity {
 
         private void setCompletedNotification(){
             mBuilder.setSmallIcon(R.drawable.chip)
-                    .setContentTitle(imgPath)
+                    .setContentTitle("DDAU upload service")
                     .setContentText("Completed");
 
             PendingIntent pendingIntent = PendingIntent.getActivity(Main3Activity.this, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);

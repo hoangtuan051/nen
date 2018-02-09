@@ -61,14 +61,16 @@
         <activity
             android:name=".Main3Activity"
             android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity android:name=".SelectImageActivity" />
+        <activity android:name=".Main4Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectImageActivity" />
-        <activity android:name=".Main4Activity" />
         <activity
             android:name=".ReviewFoodActivity"
             android:windowSoftInputMode="adjustResize"></activity>
